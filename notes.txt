@@ -1,0 +1,4 @@
+kirim data ke halaman lain
+
+update 1 kolom
+
