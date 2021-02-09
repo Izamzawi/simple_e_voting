@@ -1,30 +1,39 @@
 <?php
 // Accept session
-// session_start();
+session_start();
 
-// $collegeMail = $_SESSION["collegeMail"];
 
-// if(!isset($_SESSION["collegeMail"])){
-//     header("Location: verify.php");
-//     exit;
-// }
+if(!isset($_SESSION["eduMail"])){
+   echo "<script>
+      alert('You are not verified!');
+      </script>";
+   header("Location: verify.php");
+   exit;
+}
 
 // Load the One for All
 require("functions.php");
 
-// Vote submission
-if(isset($_POST["vote"])){
-   $voteval = $_POST["candidate"];
+// Retrieve data from session sent
+$eduMail = $_SESSION["eduMail"];
+// Query data from database by email
+// $voter = query("SELECT collegeMail FROM voterdb WHERE collegeMail = '$eduMail'")[0];
 
-   if(vote($_POST) >0 ){
-      echo "<script>
-           alert('Thanks for your vote.');
-           </script>";
-      header("Location: hasVoted.html");
-   } else{
-      echo mysqli_error($db);
-      header("Location: verify.php");
-   }
+
+// Vote submission
+if(isset($_POST["votesubmit"])){
+   var_dump($_POST["collegeMail"]);
+   var_dump($_POST["candidate"]);
+
+   // if(vote($_POST) >0 ){
+   //    echo "<script>
+   //       alert('Thanks for your vote.');
+   //       </script>";
+   //    header("Location: hasVoted.html");
+   // } else{
+   //    echo mysqli_error($db);
+   //    // header("Location: verify.php");
+   // }
 }
 
 // Write the desired page title inside quotation marks
@@ -40,8 +49,7 @@ include_once("include/navsimple.php");
    <div id="candidates" class="mb-4">
       <h3>Candidates</h3>
       <form action="" method="post">
-         <input type="hidden"><?= $collegeMail; ?></input>
-
+         <input type="hidden" name="collegeMail" id="collegeMail" value="<?= $eduMail; ?>">
          <div class="row justify-content-center">
             <div class="col-3 mb-3">
                <div class="card" >
@@ -76,7 +84,7 @@ include_once("include/navsimple.php");
          </div>
 
          <div class="d-grid gap-2 col-3 mx-auto my-5">
-            <button class="btn btn-primary btn-lg" type="submit" name="vote">Submit Your Vote</button>
+            <button class="btn btn-primary btn-lg" type="submit" name="votesubmit">Submit Your Vote</button>
          </div>
 
       </form>

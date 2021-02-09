@@ -1,6 +1,6 @@
 <?php 
-// Create a session for vote page
-// session_start();
+// Session initialization
+session_start();
 
 // Load the One for All
 require("functions.php");
@@ -14,15 +14,14 @@ if( isset($_POST["verify"]) ){
 
    //cek username
    if( mysqli_num_rows($result) === 1 ){
-       //cek password
-       $row = mysqli_fetch_assoc($result);
-       if(password_verify($pinNumber, $row["pinNumber"])){
-           // Set session
-         //   $_SESSION["login"] = true;
-
-           header("Location: vote.php");
-           exit;
-       }
+      //cek password
+      $row = mysqli_fetch_assoc($result);
+      if(password_verify($pinNumber, $row["pinNumber"])){
+         // Set session
+         $_SESSION["eduMail"] = $_POST["collegeMail"];
+         header("Location: vote.php");
+         exit;
+      }
    }
 
    $error = true;
