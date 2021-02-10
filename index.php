@@ -1,4 +1,7 @@
 <?php
+// Load the One for All
+require("functions.php");
+
 include_once("include/header.php");
 ?>
 

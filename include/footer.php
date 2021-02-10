@@ -1,10 +1,10 @@
 <footer class="bg-light">
-      <div class="container">
+      <div class="container mt-4">
          <h4>Online voting system powered by eVotec.</h4>
          <h5 class="fst-italic">Safe and Reliable</h5>
          <div id="credits" class="m-3">
-            <a href='https://www.freepik.com/photos/business'>Business photo created by jannoon028 - www.freepik.com</a>
-            <a href='https://www.freepik.com/photos/hand'>Hand photo created by Racool_studio - www.freepik.com</a>
+            <a class="d-block" href='https://www.freepik.com/photos/business'>Business photo created by jannoon028 - www.freepik.com</a>
+            <a class="d-block" href='https://www.freepik.com/photos/hand'>Hand photo created by Racool_studio - www.freepik.com</a>
          </div>
       </div>
    </footer>

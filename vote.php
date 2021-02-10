@@ -17,23 +17,17 @@ require("functions.php");
 // Retrieve data from session sent
 $eduMail = $_SESSION["eduMail"];
 // Query data from database by email
-// $voter = query("SELECT collegeMail FROM voterdb WHERE collegeMail = '$eduMail'")[0];
+$voter = query("SELECT collegeMail FROM voterdb WHERE collegeMail = '$eduMail'")[0];
 
 
 // Vote submission
 if(isset($_POST["votesubmit"])){
-   var_dump($_POST["collegeMail"]);
-   var_dump($_POST["candidate"]);
-
-   // if(vote($_POST) >0 ){
-   //    echo "<script>
-   //       alert('Thanks for your vote.');
-   //       </script>";
-   //    header("Location: hasVoted.html");
-   // } else{
-   //    echo mysqli_error($db);
-   //    // header("Location: verify.php");
-   // }
+   if(vote($_POST) >0 ){
+      header("Location: hasVoted.php");
+   } else{
+      echo mysqli_error($db);
+      header("Location: verify.php");
+   }
 }
 
 // Write the desired page title inside quotation marks
