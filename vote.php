@@ -14,6 +14,9 @@ if(!isset($_SESSION["eduMail"])){
 // Load the One for All
 require("functions.php");
 
+// Retrieve candidates' information
+$candidates = query("SELECT * FROM candidates ORDER BY id");
+
 // Retrieve data from session sent
 $eduMail = $_SESSION["eduMail"];
 // Query data from database by email
@@ -45,36 +48,20 @@ include_once("include/navsimple.php");
       <form action="" method="post">
          <input type="hidden" name="collegeMail" id="collegeMail" value="<?= $eduMail; ?>">
          <div class="row justify-content-center">
+
+            <?php foreach($candidates as $candidate) : ?>
             <div class="col-3 mb-3">
                <div class="card" >
                   <img src="img/stylish-businessman.jpg" class="card-img-top" alt="stylish-businessman">
                   <div class="card-body">
-                     <h5 class="card-title">Candidate Name</h5>
-                     <input type="radio" class="btn-check" name="candidate" value="candidate1" id="candidate1" autocomplete="off">
-                     <label class="btn btn-secondary candidate-label mx-auto" for="candidate1" style="display: block; width: 5rem;">VOTE</label>
+                     <h5 class="card-title"><?= $candidate["name"]; ?></h5>
+                     <input type="radio" class="btn-check" name="candidate" value="<?= $candidate["value"] ?>" id="<?= $candidate["value"] ?>" autocomplete="off">
+                     <label class="btn btn-secondary candidate-label mx-auto" for="<?= $candidate["value"] ?>" style="display: block; width: 5rem;">VOTE</label>
                   </div>
                </div>
             </div>
-            <div class="col-3 mb-3">
-               <div class="card" >
-                  <img src="img/businessman-torso-suit.jpg" class="card-img-top" alt="businessman-torso-suit">
-                  <div class="card-body">
-                     <h5 class="card-title">Candidate Name</h5>
-                     <input type="radio" class="btn-check" name="candidate" value="candidate2" id="candidate2" autocomplete="off">
-                     <label class="btn btn-secondary candidate-label mx-auto" for="candidate2" style="display: block; width: 5rem;">VOTE</label>
-                  </div>
-               </div>
-            </div>
-            <div class="col-3 mb-3">
-               <div class="card" >
-                  <img src="img/businessman-torso-suit2.jpg" class="card-img-top" alt="businessman-torso-suit2">
-                  <div class="card-body">
-                     <h5 class="card-title">Candidate Name</h5>
-                     <input type="radio" class="btn-check" name="candidate" value="candidate3" id="candidate3" autocomplete="off">
-                     <label class="btn btn-secondary candidate-label mx-auto" for="candidate3" style="display: block; width: 5rem;">VOTE</label>
-                  </div>
-               </div>
-            </div>
+            <?php endforeach; ?>
+
          </div>
 
          <div class="d-grid gap-2 col-3 mx-auto my-5">
