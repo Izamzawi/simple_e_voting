@@ -1,0 +1,11 @@
+{
+    "name": "izamzawi/simple-e-voting",
+    "description": "Simple web app for voting, created with PHP",
+    "authors": [
+        {
+            "name": "Idham Z",
+            "email": "idhamzamzawi@gmail.com"
+        }
+    ],
+    "require": {}
+}

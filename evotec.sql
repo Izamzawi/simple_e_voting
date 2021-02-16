@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 11, 2021 at 07:15 AM
+-- Generation Time: Feb 16, 2021 at 10:57 AM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.1
 
@@ -40,13 +40,17 @@ CREATE TABLE `achievements` (
 
 INSERT INTO `achievements` (`id`, `achievement`, `candidate_id`) VALUES
 (1, 'Senate President, 2020 Senate of Faculty of Engineering', 1),
-(2, 'Gold Medal 2020 National Robot Fair', 1),
-(5, 'Project Manager of 2020 Engineering Village', 1),
-(6, '2nd place in DOTA2, 2020 Engineering e-Sport Competition', 1),
-(7, 'Head Chief of 2019 Mechanical Engineering Student Council', 1),
+(2, 'Gold Medal (team), 2020 National Robot Fair', 1),
+(5, 'Project Manager, 2019 Engineering Village, Faculty of Engineering', 1),
+(6, '2nd place in DOTA2, 2020 Faculty of Engineering e-Sport Competition', 1),
+(7, 'Head Chief, 2019 Mechanical Engineering Student Council', 1),
 (8, 'Head of Student Welfare, 2020 Senate of Faculty of Psychology', 2),
 (9, 'Senate President, 2020 Senate of Faculty of Law', 3),
-(10, '1st place, 2020 National Constitutional Law Debate', 3);
+(10, '1st place, 2020 National Constitutional Law Debate', 3),
+(11, 'Head Chief, 2020 Athletic Club', 2),
+(12, 'Vice Project Manager, 2019 Counselling Week for Freshman', 2),
+(15, 'Head of Event Division, 2019 College BookFest', 3),
+(16, 'Project Manager, 2019 Ready-to-Work, Faculty of Law', 3);
 
 -- --------------------------------------------------------
 
@@ -58,17 +62,18 @@ CREATE TABLE `candidates` (
   `id` int(11) NOT NULL,
   `name` varchar(100) NOT NULL,
   `description` varchar(100) NOT NULL,
-  `value` varchar(10) NOT NULL
+  `value` varchar(10) NOT NULL,
+  `picture` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `candidates`
 --
 
-INSERT INTO `candidates` (`id`, `name`, `description`, `value`) VALUES
-(1, 'Leon Y Gie', 'He was 2020 Senate President of Faculty of Engineering.', 'leon'),
-(2, 'Kevin Palma', 'Head Chief of Athletic Club. He led them to win Gold Medals in the 2020 National Student Olympics.', 'kevin'),
-(3, 'Elmy Anada', 'He was the 2020 Senate President of the Faculty of Law.', 'elmy');
+INSERT INTO `candidates` (`id`, `name`, `description`, `value`, `picture`) VALUES
+(1, 'Leon Y Gie', 'He was 2020 Senate President of Faculty of Engineering.', 'leon', 'stylish-businessman'),
+(2, 'Kevin Palma', 'Head Chief of Athletic Club. He led them to win Gold Medals in the 2020 National Student Olympics.', 'kevin', 'businessman-torso-suit'),
+(3, 'Elmy Anada', 'He was the 2020 Senate President of the Faculty of Law.', 'elmy', 'businessman-torso-suit2');
 
 -- --------------------------------------------------------
 
@@ -78,7 +83,7 @@ INSERT INTO `candidates` (`id`, `name`, `description`, `value`) VALUES
 
 CREATE TABLE `programs` (
   `id` int(11) NOT NULL,
-  `programs` varchar(100) NOT NULL,
+  `program` varchar(100) NOT NULL,
   `candidate_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -86,7 +91,7 @@ CREATE TABLE `programs` (
 -- Dumping data for table `programs`
 --
 
-INSERT INTO `programs` (`id`, `programs`, `candidate_id`) VALUES
+INSERT INTO `programs` (`id`, `program`, `candidate_id`) VALUES
 (1, 'College Career Talk', 1),
 (2, 'Constitution Talk', 3),
 (3, 'Athletic Olympic Games', 2),
@@ -118,9 +123,9 @@ CREATE TABLE `voterdb` (
 
 INSERT INTO `voterdb` (`id`, `collegeMail`, `completeName`, `pinNumber`, `vote`) VALUES
 (2, 'izamzawi@edu.ac.id', 'Idham Zamzawi', '$2y$10$PubDHEGXQra.CvNA2nfUbeI4HU11WqYrPv7SpGNhw8mozQUTyajOm', 'leon'),
-(3, 'setilisti@edu.ac.id', 'Seti Listi', '$2y$10$xtTOjkVYK0EwgAddDGG2pOBhB41qYek2eoZJrgQzMItJ2jLs4Z.fm', 'candidate3'),
-(4, 'ricopp@edu.ac.id', 'Rico Putra', '$2y$10$Q76RqeKRaj7zpUaS4q5ra.Z9pDE/JRgKZmvlSSlB8e1fyjqX4wBbC', ''),
-(5, 'hanindito@edu.ac.id', 'Hanindito Satrio', '$2y$10$V.mu3cctu2EEsDqLHA0K.Owlx/AMlItHdnW7RYjY9zLoyz4MSZF3W', ''),
+(3, 'setilisti@edu.ac.id', 'Seti Listi', '$2y$10$xtTOjkVYK0EwgAddDGG2pOBhB41qYek2eoZJrgQzMItJ2jLs4Z.fm', 'leon'),
+(4, 'ricopp@edu.ac.id', 'Rico Putra', '$2y$10$Q76RqeKRaj7zpUaS4q5ra.Z9pDE/JRgKZmvlSSlB8e1fyjqX4wBbC', 'elmy'),
+(5, 'hanindito@edu.ac.id', 'Hanindito Satrio', '$2y$10$V.mu3cctu2EEsDqLHA0K.Owlx/AMlItHdnW7RYjY9zLoyz4MSZF3W', 'elmy'),
 (6, 'ammalala@edu.ac.id', 'Amma Rahmala', '$2y$10$1HoQvCMf5xFnfeB7HlnqmeN245phv7l4VehAgS.zfFLyBF86Gf16S', '');
 
 --
@@ -161,7 +166,7 @@ ALTER TABLE `voterdb`
 -- AUTO_INCREMENT for table `achievements`
 --
 ALTER TABLE `achievements`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `candidates`

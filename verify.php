@@ -20,11 +20,12 @@ if( isset($_POST["verify"]) ){
 
          // Check if already voted
          if(!isset($row["vote"])){
-            // Set session
+            // Not yet voted, and set session
             $_SESSION["eduMail"] = $_POST["collegeMail"];
             header("Location: vote.php");
             exit;
          } else {
+            // Already voted
             header("Location: hasVoted.php");
          }
       }
