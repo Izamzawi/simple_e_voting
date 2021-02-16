@@ -16,8 +16,10 @@ include_once("include/navsimple.php");
 ?>
 
 <!-- The page body can be written below -->
-<p>Congratulations! You have cast your vote.</p>
-<p>You'll be redirected to home page soon.</p>
+<div class="container">
+   <h4>Congratulations! You have cast your vote.</h4>
+   <h4>You'll be redirected to home page soon.</h4>
+</div>
 <!-- End of page -->
 
 <?php 

@@ -52,7 +52,7 @@ include_once("include/navsimple.php");
             <?php foreach($candidates as $candidate) : ?>
             <div class="col-3 mb-3">
                <div class="card" >
-                  <img src="img/stylish-businessman.jpg" class="card-img-top" alt="stylish-businessman">
+                  <img src="img/<?= $candidate["picture"] ?>.jpg" class="card-img-top" alt="<?= $candidate["picture"] ?>">
                   <div class="card-body">
                      <h5 class="card-title"><?= $candidate["name"]; ?></h5>
                      <input type="radio" class="btn-check" name="candidate" value="<?= $candidate["value"] ?>" id="<?= $candidate["value"] ?>" autocomplete="off">

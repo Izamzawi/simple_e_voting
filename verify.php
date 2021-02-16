@@ -17,10 +17,17 @@ if( isset($_POST["verify"]) ){
       //cek password
       $row = mysqli_fetch_assoc($result);
       if(password_verify($pinNumber, $row["pinNumber"])){
-         // Set session
-         $_SESSION["eduMail"] = $_POST["collegeMail"];
-         header("Location: vote.php");
-         exit;
+
+         // Check if already voted
+         if(!isset($row["vote"])){
+            // Not yet voted, and set session
+            $_SESSION["eduMail"] = $_POST["collegeMail"];
+            header("Location: vote.php");
+            exit;
+         } else {
+            // Already voted
+            header("Location: hasVoted.php");
+         }
       }
    }
 
