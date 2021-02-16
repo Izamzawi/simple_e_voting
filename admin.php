@@ -32,7 +32,6 @@ foreach($voters as $voter){
          $empty++;
    }
 }
-var_dump($elmy);
 
 // Write the desired page title inside quotation marks
 $PageTitle = "e-Voting Statistics";
