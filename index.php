@@ -4,8 +4,6 @@ require("functions.php");
 
 // Retrieve candidates' information
 $candidates = query("SELECT * FROM candidates ORDER BY id");
-$achievements = query("SELECT * FROM achievements ORDER BY id");
-$programs = query("SELECT * FROM programs ORDER BY id");
 
 include_once("include/header.php");
 ?>
@@ -19,9 +17,8 @@ include_once("include/header.php");
       </button>
       <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
          <div class="navbar-nav">
-            <a class="nav-item nav-link" href="#">Features</a>
             <a class="nav-item nav-link" href="#">About</a>
-            <a class="nav-item nav-link float-left" href="#">Admin</a>
+            <a class="nav-item nav-link float-left" href="admin.php">Admin</a>
          </div>
       </div>
    </div>
@@ -53,29 +50,41 @@ include_once("include/header.php");
       <h3>Candidates' Profile</h3>
       <div class="row justify-content-center">
 
+         <!-- Define a variable called "i" for looping through candidate ID -->
+         <?php $i=1; ?>
+         <!-- Retrieving data from candidates' table, increased the value of "i" per candidate -->
          <?php foreach($candidates as $candidate) : ?>
+         <!-- Retrieving data from programs and achievements tables, filtered by candidate ID -->
+         <?php $programs = query("SELECT * FROM programs WHERE candidate_id = '$i'"); ?>
+         <?php $achievements = query("SELECT * FROM achievements WHERE candidate_id = '$i'"); ?>
+
          <div class="col-3 mb-3">
             <div class="card" >
-               <img src="img/stylish-businessman.jpg" class="card-img-top" alt="stylish-businessman">
+               <img src="img/<?= $candidate["picture"] ?>.jpg" class="card-img-top" alt="<?= $candidate["picture"] ?>">
                <div class="card-body">
                   <h5 class="card-title"><?= $candidate["name"]; ?></h5>
                   <p class="card-text"><?= $candidate["description"]; ?></p>
 
                   <div class="card-header">Programs</div>
                   <ul class="list-group list-group-flush mb-3">
-                     <li class="list-group-item">Cras justo odio</li>
-                     <li class="list-group-item">Dapibus ac facilisis in</li>
-                     <li class="list-group-item">Vestibulum at eros</li>
+                     
+                     <?php foreach($programs as $program) : ?>
+                     <li class="list-group-item"><?= $program["program"] ?></li>
+                     <?php endforeach; ?>
                   </ul>
                   <div class="card-header">Achievements</div>
                   <ul class="list-group list-group-flush mb-3">
-                     <li class="list-group-item">Cras justo odio</li>
-                     <li class="list-group-item">Dapibus ac facilisis in</li>
-                     <li class="list-group-item">Vestibulum at eros</li>
+                     
+                     <?php foreach($achievements as $achievement) : ?>
+                     <li class="list-group-item"><?= $achievement["achievement"] ?></li>
+                     <?php endforeach; ?>
                   </ul>
                </div>
             </div>
          </div>
+
+         <!-- Increasing the value of "i" per candidate -->
+         <?php $i++; ?>
          <?php endforeach; ?>
 
       </div>
