@@ -10,7 +10,7 @@ if(isset($_POST["register"])){
          </script>";
       header("Location: verify.php");
    } else{
-      echo mysqli_error($db);
+      echo pg_result_error($db);
    }
 }
 

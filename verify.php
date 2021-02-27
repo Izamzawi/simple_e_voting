@@ -10,12 +10,12 @@ if( isset($_POST["verify"]) ){
    $collegeMail = $_POST["collegeMail"];
    $pinNumber = $_POST["pinNumber"];
 
-   $result = mysqli_query($db, "SELECT * FROM voterdb WHERE collegeMail = '$collegeMail'");
+   $result = pg_query($db, "SELECT * FROM voterdb WHERE collegeMail = '$collegeMail'");
 
    //cek username
-   if( mysqli_num_rows($result) === 1 ){
+   if( pg_num_rows($result) === 1 ){
       //cek password
-      $row = mysqli_fetch_assoc($result);
+      $row = pg_fetch_assoc($result);
       if(password_verify($pinNumber, $row["pinNumber"])){
 
          // Check if already voted

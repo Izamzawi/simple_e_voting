@@ -28,7 +28,7 @@ if(isset($_POST["votesubmit"])){
    if(vote($_POST) >0 ){
       header("Location: hasVoted.php");
    } else{
-      echo mysqli_error($db);
+      echo pg_result_error($db);
       header("Location: verify.php");
    }
 }

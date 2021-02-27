@@ -1,14 +1,14 @@
 <?php
 
 // Connection
-$db = mysqli_connect("localhost", "root", "", "evotec");
+$db = pg_connect("host=localhost dbname=ecvotec user=postgres password=postgre");
 
 // Query function
 function query($query){
    global $db;
-   $result = mysqli_query($db, $query);
+   $result = pg_query($db, $query);
    $rows = [];
-   while( $row = mysqli_fetch_assoc($result)){
+   while( $row = pg_fetch_assoc($result)){
       $rows[] = $row;
    }
    return $rows;
@@ -28,8 +28,8 @@ function register($data){
    // Checks for a correct edu mail
    // if( preg_match('/(@edu.ac.id)$/i', @collegeMail)){}
 
-   $eduMail = mysqli_query($db, "SELECT collegeMail FROM voterdb WHERE collegeMail = '$collegeMail'");
-   if(mysqli_fetch_assoc($eduMail)){
+   $eduMail = pg_query($db, "SELECT collegeMail FROM voterdb WHERE collegeMail = '$collegeMail'");
+   if(pg_fetch_assoc($eduMail)){
       echo "<script>
          alert('Email already registered');
          </script>";
@@ -54,9 +54,9 @@ function register($data){
    $newPin = password_hash($pinNumber, PASSWORD_DEFAULT);
 
    //register new voter
-   mysqli_query($db, "INSERT INTO voterdb VALUES('', '$collegeMail', '$completeName', '$newPin', '') ");
+   pg_query($db, "INSERT INTO voterdb VALUES('', '$collegeMail', '$completeName', '$newPin', '') ");
    
-   return mysqli_affected_rows($db);
+   return pg_affected_rows($db);
 }
 
 function vote($data){
@@ -66,7 +66,7 @@ function vote($data){
    $vote = $data["candidate"];
 
    $query = "UPDATE voterdb SET vote = '$vote' WHERE collegeMail = '$collegeMail'";
-   mysqli_query($db, $query);
+   pg_query($db, $query);
 
-   return mysqli_affected_rows($db);
+   return pg_affected_rows($db);
 }
