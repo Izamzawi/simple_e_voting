@@ -19,7 +19,7 @@ if( isset($_POST["verify"]) ){
       if(password_verify($pinNumber, $row["pinNumber"])){
 
          // Check if already voted
-         if(!isset($row["vote"])){
+         if(empty($row["vote"])){
             // Not yet voted, and set session
             $_SESSION["eduMail"] = $_POST["collegeMail"];
             header("Location: vote.php");
@@ -27,6 +27,7 @@ if( isset($_POST["verify"]) ){
          } else {
             // Already voted
             header("Location: hasVoted.php");
+            var_dump($row["vote"]);
          }
       }
    }
