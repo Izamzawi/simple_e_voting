@@ -10,22 +10,23 @@ if( isset($_POST["verify"]) ){
    $collegeMail = $_POST["collegeMail"];
    $pinNumber = $_POST["pinNumber"];
 
-   $result = pg_query($db, "SELECT * FROM voterdb WHERE collegeMail = '$collegeMail'");
+   $result = pg_query($db, "SELECT * FROM voterdb WHERE college_mail = '$collegeMail'");
 
-   //cek username
+   // Check for registered college_mail
    if( pg_num_rows($result) === 1 ){
-      //cek password
+
+      // Check for pin_number
       $row = pg_fetch_assoc($result);
-      if(password_verify($pinNumber, $row["pinNumber"])){
+      if(password_verify($pinNumber, $row["pin_number"])){
 
          // Check if already voted
          if(empty($row["vote"])){
-            // Not yet voted, and set session
+            // If not yet voted, set session and redirect to vote page
             $_SESSION["eduMail"] = $_POST["collegeMail"];
             header("Location: vote.php");
             exit;
          } else {
-            // Already voted
+            // If already voted
             header("Location: hasVoted.php");
             var_dump($row["vote"]);
          }

@@ -1,7 +1,7 @@
 <?php
 
 // Connection
-$db = pg_connect("host=localhost dbname=ecvotec user=postgres password=postgre");
+$db = pg_connect("host=localhost dbname=evotec user=postgres password=postgre");
 
 // Query function
 function query($query){
@@ -23,19 +23,6 @@ function register($data){
    $pinNumber = $data["pinNumber"];
    $pinNumber2 = $data["pinNumber2"];
 
-
-   // College email checking
-   // Checks for a correct edu mail
-   // if( preg_match('/(@edu.ac.id)$/i', @collegeMail)){}
-
-   $eduMail = pg_query($db, "SELECT collegeMail FROM voterdb WHERE collegeMail = '$collegeMail'");
-   if(pg_fetch_assoc($eduMail)){
-      echo "<script>
-         alert('Email already registered');
-         </script>";
-      return false;
-   }
-
    // PIN confirmation, number only
    if( is_numeric($pinNumber) ){
       if ( $pinNumber !== $pinNumber2){
@@ -50,13 +37,13 @@ function register($data){
       </script>";    
    }
 
-   // PIN ecnription
+   // PIN encription
    $newPin = password_hash($pinNumber, PASSWORD_DEFAULT);
 
-   //register new voter
-   pg_query($db, "INSERT INTO voterdb VALUES('', '$collegeMail', '$completeName', '$newPin', '') ");
+   // Register new voter and check for college_mail duplicate
+   $result = pg_query($db, "INSERT INTO voterdb (college_mail, complete_name, pin_number) VALUES('$collegeMail', '$completeName', '$newPin') ON CONFLICT (college_mail) DO NOTHING");
    
-   return pg_affected_rows($db);
+   return pg_affected_rows($result);
 }
 
 function vote($data){
@@ -65,8 +52,8 @@ function vote($data){
    $collegeMail = $data["collegeMail"];
    $vote = $data["candidate"];
 
-   $query = "UPDATE voterdb SET vote = '$vote' WHERE collegeMail = '$collegeMail'";
-   pg_query($db, $query);
+   $query = "UPDATE voterdb SET vote = '$vote' WHERE college_mail = '$collegeMail'";
+   $result = pg_query($db, $query);
 
-   return pg_affected_rows($db);
+   return pg_affected_rows($result);
 }

@@ -9,6 +9,10 @@ if(isset($_POST["register"])){
          alert('Registration succeed.');
          </script>";
       header("Location: verify.php");
+   }else if(register($_POST) == 0 ){
+      echo "<script>
+         alert('Email already registered.');
+         </script>";
    } else{
       echo pg_result_error($db);
    }

@@ -20,7 +20,7 @@ $candidates = query("SELECT * FROM candidates ORDER BY id");
 // Retrieve data from session sent
 $eduMail = $_SESSION["eduMail"];
 // Query data from database by email
-$voter = query("SELECT collegeMail FROM voterdb WHERE collegeMail = '$eduMail'")[0];
+$voter = query("SELECT college_mail FROM voterdb WHERE college_mail = '$eduMail'")[0];
 
 
 // Vote submission
@@ -29,7 +29,7 @@ if(isset($_POST["votesubmit"])){
       header("Location: hasVoted.php");
    } else{
       echo pg_result_error($db);
-      header("Location: verify.php");
+      // header("Location: verify.php");
    }
 }
 
