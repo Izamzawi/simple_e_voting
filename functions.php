@@ -1,7 +1,10 @@
 <?php
 
 // Connection
-$db = pg_connect("host=localhost dbname=evotec user=postgres password=postgre");
+$db = pg_connect("host=ec2-54-87-34-201.compute-1.amazonaws.com 
+                  dbname=d8ps3q8u9o4un 
+                  user=nmfqhwbqtjlaep 
+                  password=54fd8cfd7413bda31b8dd6a045e37fc280b5d891f0d21dda1385a8943e7bb31d");
 
 // Query function
 function query($query){
